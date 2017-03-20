@@ -1,0 +1,838 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "Apartment Butler API"
+    },
+    "host": "localhost:3000",
+    "basePath": "/v1",
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register User",
+                "description": "The Users endpoint returns information about the user\n",
+                "parameters": [
+                    {
+                        "name": "firstName",
+                        "in": "formData",
+                        "description": "First name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "formData",
+                        "description": "Last Name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "Role of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get User",
+                "description": "This endpoint returns information about the user by its id.\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "Id of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update User",
+                "description": "This endpoint updates information of the user by its id.\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "Id of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "firstName",
+                        "in": "formData",
+                        "description": "First name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "formData",
+                        "description": "Last name of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/authenticate": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Authenticate user User",
+                "description": "The Users endpoint returns information about the user and auth token\n",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "User Email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "User Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/authorize/google": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Authorize User with google auth info.",
+                "description": "The Users endpoint returns information about the user\n",
+                "parameters": [
+                    {
+                        "name": "accessToken",
+                        "in": "formData",
+                        "description": "Google User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "User Type",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/authorize/facebook": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Authorize User with facebook auth info.",
+                "description": "The Users endpoint returns information about the user\n",
+                "parameters": [
+                    {
+                        "name": "accessToken",
+                        "in": "formData",
+                        "description": "Facebook User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "User Type",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/locations": {
+            "post": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Register Location",
+                "description": "The Bookables endpoint returns information about the location\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "street",
+                        "in": "formData",
+                        "description": "Street of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "City of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "State of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "zipcode",
+                        "in": "formData",
+                        "description": "Zipcode of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lat",
+                        "in": "formData",
+                        "description": "Latitude of Location",
+                        "type": "string"
+                    },
+                    {
+                        "name": "long",
+                        "in": "formData",
+                        "description": "Longitude of Location",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Location",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/location/{id}": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Get Location",
+                "description": "This endpoint returns information about the location by its id.\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Location",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Location",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Update Location",
+                "description": "This endpoint updates information of the bookable by its id.\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "street",
+                        "in": "formData",
+                        "description": "Street of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "City of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "State of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "zipcode",
+                        "in": "formData",
+                        "description": "Zipcode of Location",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lat",
+                        "in": "formData",
+                        "description": "Latitude of Location",
+                        "type": "string"
+                    },
+                    {
+                        "name": "long",
+                        "in": "formData",
+                        "description": "Longitude of Location",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Location",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Delete Location",
+                "description": "This endpoint returns information about the location by its id.\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Location",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/manager/{managerId}/location/{locationId}": {
+            "post": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Register Location",
+                "description": "The Service Entity endpoint adds Location to the Manager\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "locationId",
+                        "in": "path",
+                        "description": "Id of Location to be added",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Service Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceEntity"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Get Service Entity",
+                "description": "The Service Entity endpoint returns entity info with its Id\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "locationId",
+                        "in": "path",
+                        "description": "Id of Location to be added",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Service Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceEntity"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Register Service Entity",
+                "description": "The Service Entity endpoint update entity info with its Id(still have no detailed info about Entity)\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "locationId",
+                        "in": "path",
+                        "description": "Id of Location to be added",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of Service Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceEntity"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Delete Service Entity",
+                "description": "The Service Entity endpoint \n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "locationId",
+                        "in": "path",
+                        "description": "Id of Location to be added",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success Message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/manager/{managerId}/runner/{runnerId}": {
+            "get": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Add Runner to Manager",
+                "description": "The Service Entity endpoint adds Runner to the Manager\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "runnerId",
+                        "in": "path",
+                        "description": "Id of Runner to be added",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User(Manager)",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Service Entity"
+                ],
+                "summary": "Remove Runner from Manager",
+                "description": "The Service Entity endpoint remove Runner from the Manager\n",
+                "parameters": [
+                    {
+                        "name": "x-access-token",
+                        "in": "header",
+                        "description": "User Access Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "managerId",
+                        "in": "path",
+                        "description": "Manager Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "runnerId",
+                        "in": "path",
+                        "description": "Id of Runner to be removed",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An Object of User(Manager)",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Error": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "date_created": {
+                    "type": "string"
+                }
+            }
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "street": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "zipcode": {
+                    "type": "string"
+                },
+                "lat": {
+                    "type": "string"
+                },
+                "long": {
+                    "type": "string"
+                }
+            }
+        },
+        "ServiceEntity": {
+            "type": "object",
+            "properties": {
+                "managerId": {
+                    "type": "string"
+                },
+                "locationId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
