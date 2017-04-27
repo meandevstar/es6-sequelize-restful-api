@@ -8,8 +8,6 @@ import {errorHandler}       from './module-middlewares';
 
 import restIdentity         from './rest-identity';
 import restUsers            from './rest-users';
-import restLocations        from './rest-locations';
-import restEntities         from './rest-service-entity';
 
 
 const app = express();
@@ -22,8 +20,6 @@ app.use(morgan('dev'));
 
 restIdentity(app);
 restUsers(app);
-restLocations(app);
-restEntities(app);
 
 app.use(errorHandler);
 
@@ -42,7 +38,7 @@ if (process.argv[2] === 'development') {
 swagger.configureSwaggerPaths('', 'swagger', '');
 
 swagger.setApiInfo({
-    title: "Apartment Butler API",
+    title: "User API",
     termsOfServiceUrl: "",
     contact: "",
     license: "",

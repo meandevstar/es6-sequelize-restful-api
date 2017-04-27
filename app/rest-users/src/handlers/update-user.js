@@ -43,11 +43,11 @@ const updateUser = (req, res, next) => {
 	const query = {where: {id: userId}};
 	
 
-	User.findById(userId).then(function (findResult) {
+	User.findById(userId).then((findResult) => {
 		if (findResult) {
 			findResult.updateAttributes(payload).then(function(updateResult) {
-				var result = omit(updateResult.dataValues, fieldsToOmit);
-				res.status(200).send(result);
+				var result = omit(updateResult.toJSON(), fieldsToOmit);
+				res.status(200).json(result);
 			});
 		} else {
 			return next(new UnprocessableEntityError('user not exist'));

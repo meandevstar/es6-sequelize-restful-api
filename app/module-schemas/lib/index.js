@@ -1,8 +1,5 @@
 import db from './db';
 import {User, userStatuses, userTypes} from './user';
-import {Location} from './location';
-import {ServiceEntity} from './service-entity';
-import {plainTransform} from './utils';
 
 const user = {
     statuses: userStatuses,
@@ -10,12 +7,7 @@ const user = {
     User: User
 };
 
-const utils = {
-    plainTransform: plainTransform
-}
-
 export {
     db,
-    user,
-    utils
+    user
 };

@@ -3,8 +3,8 @@ import sequelize from './db';
 import {Sequelize} from 'sequelize';
 import * as revalidator from 'revalidator';
 
-const userStatuses = ['active', 'inactive'];
-const userTypes = ['resident', 'service_provider', 'service_runner', 'qa' , 'admin'];
+const userStatuses = ['ACTIVE', 'INACTIVE'];
+const userTypes = ['ADMIN', 'USER'];
 
 var schemaValidator = function (schema) {
     return function (value) {
@@ -45,7 +45,7 @@ const userAttributes = {
         values: userStatuses,
         allowNull: false,
         field: 'status',
-        defaultValue: 'active'
+        defaultValue: 'ACTIVE'
     },
 
     type: {
@@ -53,7 +53,7 @@ const userAttributes = {
         values: userTypes,
         allowNull: false,
         field: 'type',
-        defaultValue: 'resident'
+        defaultValue: 'USER'
     },
 
     facebook: {
@@ -68,12 +68,6 @@ const userAttributes = {
                 }
             })
         }
-    },
-
-    metadata: {
-        type:Sequelize.JSONB,
-        field: 'metadata',
-        defaultValue: {}
     },
 
     google: {
@@ -91,7 +85,7 @@ const userAttributes = {
     }
 };
 
-var User = sequelize.define('user', userAttributes, {
+var User = sequelize.define('User', userAttributes, {
   freezeTableName: true // Model tableName will be the same as the model name
 });
 

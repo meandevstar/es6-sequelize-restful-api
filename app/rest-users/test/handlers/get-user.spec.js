@@ -20,8 +20,7 @@ describe("[GET] /v1/users/:userId", function() {
 		'facebook',
 		'google',
 		'createdAt',
-		'updatedAt',
-		'metadata'
+		'updatedAt'
 	];
 
 

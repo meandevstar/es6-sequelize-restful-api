@@ -31,7 +31,7 @@ describe("[POST] /v1/users", function() {
 
     beforeEach(() => {
         payload = generateUser();
-        payload.type = random.pick(without(types, 'admin'));
+        payload.type = random.pick(without(types, 'ADMIN'));
         delete payload.status;
         delete payload.createdAt;
         delete payload.updatedAt;

@@ -34,10 +34,8 @@ const getUser = (req, res, next) => {
 	const {userId} = req.params;
 
 	User.findById(userId).then(function (result) {
-
-		result = omit(result.dataValues, fieldsToOmit);
-		result = utils.plainTransform(result);
-		res.status(200).send(result);
+		result = omit(result.toJSON(), fieldsToOmit);
+		res.status(200).json(result);
 	});
 };
 

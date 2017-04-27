@@ -1,12 +1,10 @@
 import {waterfall}      from 'async';
 import {get}            from '../module-config';
-import {db, user, location, serviceEntity}       from '../module-schemas';
-import {generateUser, generateLocation, generateServiceEntity}   from '../module-testhelpers';
+import {db, user}       from '../module-schemas';
+import {generateUser}   from '../module-testhelpers';
 import {issueToken}     from '../module-jwt';
 
 const {User} = user;
-const {Location} = location;
-const {ServiceEntity} = serviceEntity;
 
 before(function(done) {
     this.timeout(20000);
@@ -64,27 +62,6 @@ after(function(done) {
             
             const query = {where: {id: global.user.id}};
             User.find(query).then(function(result){
-                if (result)
-                    result.destroy();
-                cb();
-            });
-        },
-        function (cb) {
-            if(!global.location) return cb();
-            
-            const query = {where: {id: global.location.id}};
-            Location.find(query).then(function(result){
-                if (result)
-                    result.destroy();
-                cb();
-            });
-        },
-        function (cb) {
-            if(!global.serviceEntity) return cb();
-            
-            const query = {where: {id: global.serviceEntity.id}};
-
-            ServiceEntity.find(query).then(function(result){
                 if (result)
                     result.destroy();
                 done();

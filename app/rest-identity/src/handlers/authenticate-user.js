@@ -55,7 +55,7 @@ const authenticate = (req, res, next) => {
             const responseBody  = {user: userDetails, token};
 
             res.set('x-user-type', type);
-            res.status(200).send(responseBody);
+            res.status(200).json(responseBody);
         });
     });
 };

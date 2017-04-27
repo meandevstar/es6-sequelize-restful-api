@@ -97,7 +97,7 @@ const authorizeGoogle = (req, res, next) => {
 		const responseBody  = {user: userDetails, token};
 
 		res.set('x-user-type', result.type);
-		res.status(201).send(responseBody);
+		res.status(201).json(responseBody);
 	});
 };
 

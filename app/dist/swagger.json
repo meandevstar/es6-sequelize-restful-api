@@ -4,7 +4,7 @@
         "version": "0.0.0",
         "title": "User API"
     },
-    "host": "localhost:3000",
+    "host": "localhost:8080",
     "basePath": "/v1",
     "paths": {
         "/users": {
@@ -48,7 +48,10 @@
                         "in": "formData",
                         "description": "Role of User",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "enum": [
+                            "USER"
+                        ]
                     }
                 ],
                 "responses": {

@@ -13,7 +13,7 @@ describe('generateUser()', function() {
             'createdAt',
             'updatedAt',
             'status',
-            'metadata'
+            'type'
         ]);
     });
 });

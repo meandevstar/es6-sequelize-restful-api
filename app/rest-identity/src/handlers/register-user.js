@@ -12,7 +12,7 @@ import {UnprocessableEntityError} from '../../../module-errors';
 
 const router = new Router();
 const {User, types} = user;
-const allowedTypes = without(types, 'admin');
+const allowedTypes = without(types, 'ADMIN');
 const fieldsToOmit = ['password'];
 const allowedFields = [
     'firstName',
@@ -40,12 +40,6 @@ const schema = {
 
 const registerUser = (req, res, next) => {
     let payload = pick(req.body, allowedFields);
-    payload.google = {};
-    payload.facebook = {};
-    payload.google.userId = 'null';
-    payload.google.accessToken = 'null';
-    payload.facebook.userId = 'null';
-    payload.facebook.accessToken = 'null';
 
     const query = {where: {email: payload.email}};
 
@@ -57,7 +51,7 @@ const registerUser = (req, res, next) => {
 
         User.create(payload).then((result) => {
             result = omit(result.dataValues, fieldsToOmit);
-            res.status(201).send(result);
+            res.status(201).json(result);
         });
     });
 };

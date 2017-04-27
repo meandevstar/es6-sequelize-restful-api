@@ -13,7 +13,6 @@ export default function () {
         password: random.string({length: 8}),
         status: random.pickone(statuses),
         createdAt: random.date(),
-        updatedAt: random.date(),
-        metadata: {}
+        updatedAt: random.date()
     };
 }
